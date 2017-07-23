@@ -34,6 +34,9 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SignInComponent } from './+sign-in/sign-in.component';
+import { MainComponent } from './+main/main.component';
+import { PhotoDetailComponent } from './+photo-detail/photo-detail.component';
 
 
 export const MaterialModules = [
@@ -64,7 +67,10 @@ export const MaterialModules = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SignInComponent,
+    MainComponent,
+    PhotoDetailComponent
   ],
   imports: [
     BrowserModule,

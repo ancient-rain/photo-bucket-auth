@@ -1,0 +1,38 @@
+md-card {
+    padding: 20px 40px;
+    margin: 30px 10px;
+}
+
+#google-button {
+    background-color: transparent;
+    background-image: url('/assets/images/google_signin_dark.png');
+    width: 191px;
+    height: 46px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    &:active {
+        background-image: url('/assets/images/google_signin_dark_pressed.png');
+    }
+}
+
+
+#rosefire-button {
+    background-color: #800000;
+    color: white;
+    font-size: 16px;
+    margin: 20px;
+    padding: 5px 20px;
+}
+
+/* added class because card just stretched to the full width */
+.cardDiv {
+    place-content: stretch center; 
+    align-items: stretch; 
+    display: flex; 
+    flex-direction: row; 
+    box-sizing: border-box; 
+    -webkit-box-pack: center; 
+    -webkit-box-align: stretch; 
+    -webkit-box-orient: horizontal; 
+    -webkit-box-direction: normal;
+}

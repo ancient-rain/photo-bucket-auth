@@ -1,4 +1,16 @@
 <md-toolbar color="primary">
   Photo Bucket
+  <span fxFlex></span>
+  <button md-icon-button [mdMenuTriggerFor]="signOutMenu">
+    <md-icon>more_vert</md-icon>
+  </button>
+  <md-menu #signOutMenu="mdMenu" [overlapTrigger]="false">
+    <button md-menu-item>Sign Out</button>
+  </md-menu>
 </md-toolbar>
-<router-outlet></router-outlet>
+<div fxLayoutAlign="center center">
+  <div class="container" fxFlex fxFlex.md="960px" fxFlex.gt-md="1100px">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
