@@ -7,6 +7,7 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class AuthService {
   isSignedInStream: Observable<boolean>;
+  displayName: Observable<string>;
 
   constructor(private afAuth: AngularFireAuth,
     private router: Router) {
@@ -22,6 +23,15 @@ export class AuthService {
       .map<firebase.User, boolean>((user: firebase.User) => {
         return user != null;
       });
+
+    this.displayName = this.afAuth.authState
+      .map<firebase.User, string>((user: firebase.User) => {
+        if (user) {
+          return user.displayName;
+        }
+        return '';
+      });
+
   }
 
   signInWithGoogle(): void {
