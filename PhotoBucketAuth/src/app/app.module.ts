@@ -38,6 +38,7 @@ import { SignInComponent } from './+sign-in/sign-in.component';
 import { MainComponent } from './+main/main.component';
 import { PhotoDetailComponent } from './+photo-detail/photo-detail.component';
 import { AuthService } from "./services/auth.service";
+import { AuthGuard } from "./services/auth.guard";
 
 
 export const MaterialModules = [
@@ -86,6 +87,7 @@ export const MaterialModules = [
   ],
   providers: [
     AuthService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

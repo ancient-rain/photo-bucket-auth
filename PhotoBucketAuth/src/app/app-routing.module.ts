@@ -3,11 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from "./+main/main.component";
 import { SignInComponent } from "./+sign-in/sign-in.component";
 import { PhotoDetailComponent } from "./+photo-detail/photo-detail.component";
+import { AuthGuard } from "./services/auth.guard";
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
+  { path: '', component: MainComponent, canActivate: [AuthGuard] },
   { path: 'signin', component: SignInComponent },
-  { path: 'photoKey', component: PhotoDetailComponent },
+  { path: 'photoKey', component: PhotoDetailComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' },
 ];
 
