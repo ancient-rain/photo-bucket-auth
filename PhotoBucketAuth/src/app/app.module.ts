@@ -37,6 +37,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { SignInComponent } from './+sign-in/sign-in.component';
 import { MainComponent } from './+main/main.component';
 import { PhotoDetailComponent } from './+photo-detail/photo-detail.component';
+import { AuthService } from "./services/auth.service";
 
 
 export const MaterialModules = [
@@ -83,7 +84,9 @@ export const MaterialModules = [
     MaterialModules,
     FlexLayoutModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

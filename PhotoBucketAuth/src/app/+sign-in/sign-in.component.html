@@ -3,8 +3,8 @@
     <md-card-title>
       You must be signed in
     </md-card-title>
-    <button md-button type="button" id="google-button"></button>
-    <button md-raised-button type="button" id="rosefire-button">
+    <button md-button (click)="authService.signInWithGoogle()" type="button" id="google-button"></button>
+    <button md-raised-button (click)="authService.signInWithRosefire()" type="button" id="rosefire-button">
       Rose-Hulman Login
     </button>
   </md-card>

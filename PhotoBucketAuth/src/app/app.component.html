@@ -1,11 +1,11 @@
 <md-toolbar color="primary">
   Photo Bucket
   <span fxFlex></span>
-  <button md-icon-button [mdMenuTriggerFor]="signOutMenu">
+  <button *ngIf="authService.isSignedInStream | async" md-icon-button [mdMenuTriggerFor]="signOutMenu">
     <md-icon>more_vert</md-icon>
   </button>
   <md-menu #signOutMenu="mdMenu" [overlapTrigger]="false">
-    <button md-menu-item>Sign Out</button>
+    <button md-menu-item (click)="authService.signOut()">Sign Out</button>
   </md-menu>
 </md-toolbar>
 <div fxLayoutAlign="center center">
