@@ -3,6 +3,8 @@ import { AngularFireAuth } from "angularfire2/auth";
 import * as firebase from 'firebase/app';
 import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
+import 'rosefire';
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class AuthService {
@@ -13,12 +15,12 @@ export class AuthService {
     private router: Router) {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
-        console.log('user signed in', user);
+        // console.log('user signed in', user);
       } else {
-        console.log('user signed out');
+        // console.log('user signed out');
       }
     });
-
+    console.log(this.afAuth);
     this.isSignedInStream = this.afAuth.authState
       .map<firebase.User, boolean>((user: firebase.User) => {
         return user != null;
@@ -27,7 +29,10 @@ export class AuthService {
     this.displayName = this.afAuth.authState
       .map<firebase.User, string>((user: firebase.User) => {
         if (user) {
-          return user.displayName;
+          if (user.displayName) {
+            return user.displayName;
+          }
+          return user.uid;
         }
         return '';
       });
@@ -45,7 +50,17 @@ export class AuthService {
   }
 
   signInWithRosefire(): void {
-    console.log('TODO: rosefire login');
+    Rosefire.signIn(environment.rosefireRegistryToken, (error, rfUser: RosefireUser) => {
+      if (error) {
+        // User not logged in!
+        console.error(error);
+        return;
+      }
+
+      this.afAuth.auth.signInWithCustomToken(rfUser.token).then((authState) => {
+        this.router.navigate(['']);
+      });
+    });
   }
 
   signOut(): void {
