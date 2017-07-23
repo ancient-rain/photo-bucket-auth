@@ -39,6 +39,7 @@ import { MainComponent } from './+main/main.component';
 import { PhotoDetailComponent } from './+photo-detail/photo-detail.component';
 import { AuthService } from "./services/auth.service";
 import { AuthGuard } from "./services/auth.guard";
+import { PhotoDialogComponent } from './photo-dialog/photo-dialog.component';
 
 
 export const MaterialModules = [
@@ -72,7 +73,11 @@ export const MaterialModules = [
     AppComponent,
     SignInComponent,
     MainComponent,
-    PhotoDetailComponent
+    PhotoDetailComponent,
+    PhotoDialogComponent,
+  ],
+  entryComponents: [
+    PhotoDialogComponent,
   ],
   imports: [
     BrowserModule,

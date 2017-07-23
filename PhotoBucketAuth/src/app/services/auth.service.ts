@@ -7,6 +7,8 @@ import 'rosefire';
 import { environment } from "../../environments/environment";
 import { FirebaseListObservable, AngularFireDatabase } from "angularfire2/database";
 import { Photo } from "../models/photo.model";
+import { MdDialog, MdDialogConfig } from "@angular/material";
+import { PhotoDialogComponent } from "../photo-dialog/photo-dialog.component";
 
 @Injectable()
 export class AuthService {
@@ -14,9 +16,11 @@ export class AuthService {
   displayName: Observable<string>;
   photoStream: FirebaseListObservable<Photo[]>;
 
+
   constructor(private afAuth: AngularFireAuth,
     private router: Router,
-    private db: AngularFireDatabase) {
+    private db: AngularFireDatabase,
+    private dialog: MdDialog) {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
         // console.log('user signed in', user);
@@ -71,5 +75,12 @@ export class AuthService {
   signOut(): void {
     this.afAuth.auth.signOut();
     this.router.navigate(['/signin']);
+  }
+
+  showPhotoDialog(): void {
+    console.log('TODO: show photo dialog');
+    // const dialogConfig = new MdDialogConfig();
+    // dialogConfig.data = {firebasePath: this.firebasePath};
+    this.dialog.open(PhotoDialogComponent);
   }
 }
