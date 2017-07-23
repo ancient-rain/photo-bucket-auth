@@ -1,3 +1,12 @@
-<p>
-  main works!
-</p>
+<md-tab-group>
+  <md-tab label="All Photos">
+    <md-grid-list cols="1">
+      <md-grid-tile *ngFor="let photo of authService.photoStream | async">
+        <pre>{{photo | json}}</pre>
+      </md-grid-tile>
+    </md-grid-list>
+  </md-tab>
+  <md-tab label="My Photos">
+    My Photos
+  </md-tab>
+</md-tab-group>

@@ -5,17 +5,22 @@ import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import 'rosefire';
 import { environment } from "../../environments/environment";
+import { FirebaseListObservable, AngularFireDatabase } from "angularfire2/database";
+import { Photo } from "../models/photo.model";
 
 @Injectable()
 export class AuthService {
   isSignedInStream: Observable<boolean>;
   displayName: Observable<string>;
+  photoStream: FirebaseListObservable<Photo[]>;
 
   constructor(private afAuth: AngularFireAuth,
-    private router: Router) {
+    private router: Router,
+    private db: AngularFireDatabase) {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
         // console.log('user signed in', user);
+        this.photoStream = this.db.list(`photos`);
       } else {
         // console.log('user signed out');
       }
