@@ -15,7 +15,7 @@ export class AuthService {
   isSignedInStream: Observable<boolean>;
   displayName: Observable<string>;
   photoStream: FirebaseListObservable<Photo[]>;
-
+  formPhoto: Photo;
 
   constructor(private afAuth: AngularFireAuth,
     private router: Router,
@@ -29,7 +29,7 @@ export class AuthService {
         // console.log('user signed out');
       }
     });
-    console.log(this.afAuth);
+
     this.isSignedInStream = this.afAuth.authState
       .map<firebase.User, boolean>((user: firebase.User) => {
         return user != null;
@@ -46,6 +46,7 @@ export class AuthService {
         return '';
       });
 
+    this.formPhoto = new Photo();
   }
 
   signInWithGoogle(): void {

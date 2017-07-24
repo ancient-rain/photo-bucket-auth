@@ -1,3 +1,21 @@
-<p>
-  photo-dialog works!
-</p>
+<h1 md-dialog-title>Add a new photo</h1>
+<form #photoForm="ngForm" fxLayout="column" fxLayoutAlign="none stretch" (ngSubmit)="onSubmit()">
+  <md-dialog-content fxFlex="100" fxLayout="column" fxLayoutAlign="none stretch">
+    <md-input-container>
+      <input mdInput required [(ngModel)]="formPhoto.imageUrl" placeholder="Add an existing photo URL" name="photoUrl">
+    </md-input-container>
+    <div fxLayoutAlign="end center">
+      <p>or&nbsp;&nbsp;</p>
+      <button md-raised-button type="button" color="accent">
+      Upload an image
+    </button>
+    </div>
+    <md-input-container>
+      <input mdInput [(ngModel)]="formPhoto.caption" placeholder="Caption" name="caption">
+    </md-input-container>
+  </md-dialog-content>
+  <md-dialog-actions fxLayoutAlign="end center">
+    <button md-button type="button" md-dialog-close>Cancel</button>
+    <button md-button [disabled]="!photoForm.form.valid" type="submit">Save</button>
+  </md-dialog-actions>
+</form>
