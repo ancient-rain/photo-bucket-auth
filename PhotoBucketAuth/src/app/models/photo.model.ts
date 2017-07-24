@@ -1,12 +1,5 @@
-export class FirebaseFlatSnapshot {
-    public $key?: string;
-
-    constructor(obj?: any) {
-        if (obj && obj.$key) {
-            this.$key = obj.$key;
-        }
-    }
-}
+import { FirebaseFlatSnapshot } from "./firebase-flat-snapshot";
+import { User } from "./user";
 
 export class Photo extends FirebaseFlatSnapshot {
     caption: string;
@@ -18,5 +11,14 @@ export class Photo extends FirebaseFlatSnapshot {
         this.caption = obj && obj.caption || '';
         this.imageUrl = obj && obj.imageUrl || '';
         this.uid = obj && obj.uid || '';
+    }
+}
+
+export class PhotoWithAuthor extends Photo {
+    public user: User;
+
+    constructor(obj?: any) {
+        super(obj);
+        this.user = obj && obj.author || new User();
     }
 }
