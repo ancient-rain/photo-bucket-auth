@@ -9,6 +9,7 @@ import { FirebaseListObservable, AngularFireDatabase } from "angularfire2/databa
 import { Photo } from "../models/photo.model";
 import { MdDialog, MdDialogConfig } from "@angular/material";
 import { PhotoDialogComponent } from "../photo-dialog/photo-dialog.component";
+import { AuthorService } from "./author.service";
 
 @Injectable()
 export class AuthService {
@@ -20,7 +21,8 @@ export class AuthService {
   constructor(private afAuth: AngularFireAuth,
     private router: Router,
     private db: AngularFireDatabase,
-    private dialog: MdDialog) {
+    private dialog: MdDialog,
+    private authorService: AuthorService) {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
         this.userPath = `/users/${user.uid}`;
@@ -53,7 +55,7 @@ export class AuthService {
       .then((result: any) => {
         this.router.navigate(['/']);
         const user: firebase.User = result.user;
-        // this.authorService.updateAuthor(user.uid, user.displayName, user.photoURL);
+        this.authorService.updateUser(user.uid, user.uid);
       });
 
   }
@@ -65,7 +67,7 @@ export class AuthService {
         console.error(error);
         return;
       }
-
+      this.authorService.updateUser(rfUser.username, rfUser.username);
       this.afAuth.auth.signInWithCustomToken(rfUser.token).then((authState) => {
         this.router.navigate(['']);
       });
