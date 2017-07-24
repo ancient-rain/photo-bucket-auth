@@ -3,6 +3,7 @@ import { Photo } from "../models/photo.model";
 import { MdDialogRef, MD_DIALOG_DATA } from "@angular/material";
 import { AngularFireAuth } from "angularfire2/auth";
 import * as firebase from 'firebase/app';
+import { PostService } from "../services/post.service";
 
 interface PhotoDialogData {
   photosPath: string;
@@ -21,11 +22,10 @@ export class PhotoDialogComponent implements OnInit {
   userUid: string;
 
   constructor(private dialogRef: MdDialogRef<PhotoDialogComponent>,
-  @Inject(MD_DIALOG_DATA) private dialogData: PhotoDialogData,
-  private afAuth: AngularFireAuth) { 
+  private afAuth: AngularFireAuth,
+  private postService: PostService) { 
     this.formPhoto = new Photo();
     this.userUid = this.afAuth.auth.currentUser.uid;
-    console.log('recieved the data', this.dialogData);
   }
 
   ngOnInit() {
@@ -33,18 +33,8 @@ export class PhotoDialogComponent implements OnInit {
 
   onSubmit(): void {
     try {
-      const userRef = firebase.database().ref(this.dialogData.usersPath);
-      const photoRef = firebase.database().ref(this.dialogData.photosPath);
-
-      console.log(this.dialogData.usersPath);
-
-      if (this.dialogData.usersPath) {
-        userRef.push(this.userUid);
-      }
-
       this.formPhoto.uid = this.userUid;
-      photoRef.push(this.formPhoto);
-
+      this.postService.add(this.formPhoto);
       this.dialogRef.close();
     } catch (e) {
       console.error('Submit error: ', e);

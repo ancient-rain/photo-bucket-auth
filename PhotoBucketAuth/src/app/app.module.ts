@@ -40,6 +40,7 @@ import { PhotoDetailComponent } from './+photo-detail/photo-detail.component';
 import { AuthService } from "./services/auth.service";
 import { AuthGuard } from "./services/auth.guard";
 import { PhotoDialogComponent } from './photo-dialog/photo-dialog.component';
+import { PostService } from "./services/post.service";
 
 
 export const MaterialModules = [
@@ -93,6 +94,7 @@ export const MaterialModules = [
   providers: [
     AuthService,
     AuthGuard,
+    PostService,
   ],
   bootstrap: [AppComponent]
 })

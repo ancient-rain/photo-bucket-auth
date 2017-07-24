@@ -14,7 +14,6 @@ import { PhotoDialogComponent } from "../photo-dialog/photo-dialog.component";
 export class AuthService {
   isSignedInStream: Observable<boolean>;
   displayName: Observable<string>;
-  photoStream: FirebaseListObservable<Photo[]>;
   formPhoto: Photo;
   userPath: string;
 
@@ -25,7 +24,6 @@ export class AuthService {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
         this.userPath = `/users/${user.uid}`;
-        this.photoStream = this.db.list(`/photos`);
       } else {
         // console.log('user signed out');
       }
@@ -80,9 +78,6 @@ export class AuthService {
   }
 
   showPhotoDialog(): void {
-    console.log('TODO: show photo dialog');
-    const dialogConfig = new MdDialogConfig();
-    dialogConfig.data = {usersPath: this.userPath, photosPath: `/photos`};
-    this.dialog.open(PhotoDialogComponent, dialogConfig);
+    this.dialog.open(PhotoDialogComponent);
   }
 }
