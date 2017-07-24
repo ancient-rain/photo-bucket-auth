@@ -3,9 +3,9 @@ import { AuthService } from "../auth.service";
 import { PostService } from "../post.service";
 
 @Component({
-  selector: 'app-post-list',
-  templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.scss']
+  selector: 'app-photo-list',
+  templateUrl: './photo-list.component.html',
+  styleUrls: ['./photo-list.component.scss']
 })
 export class PostListComponent implements OnInit {
 

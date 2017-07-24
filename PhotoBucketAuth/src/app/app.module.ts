@@ -41,8 +41,9 @@ import { AuthService } from "./services/auth.service";
 import { AuthGuard } from "./services/auth.guard";
 import { PhotoDialogComponent } from './photo-dialog/photo-dialog.component';
 import { PostService } from "./services/post.service";
-import { PostListComponent } from './services/post-list/post-list.component';
-import { PostComponent } from './services/post/post.component';
+import { PostListComponent } from './services/photo-list/photo-list.component';
+import { PostComponent } from './services/photo-card/photo-card.component';
+import { ReversePipe } from './pipes/reverse.pipe';
 
 
 export const MaterialModules = [
@@ -80,6 +81,7 @@ export const MaterialModules = [
     PhotoDialogComponent,
     PostListComponent,
     PostComponent,
+    ReversePipe,
   ],
   entryComponents: [
     PhotoDialogComponent,

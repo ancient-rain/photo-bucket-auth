@@ -20,6 +20,5 @@ export class PostService {
   add(photo: Photo): void {
     console.log('pushing the photo', photo);
     this._photosStream.push(photo);
-    console.log(this._photosStream);
   }
 }
