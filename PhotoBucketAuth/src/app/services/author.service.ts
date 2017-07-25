@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { User } from "../models/user";
-import { AngularFireDatabase } from "angularfire2/database";
+import { AngularFireDatabase, FirebaseObjectObservable } from "angularfire2/database";
 
 @Injectable()
 export class AuthorService {
   readonly usersPath = 'users';
 
-  constructor(private db: AngularFireDatabase) { }
+  userMapStream: FirebaseObjectObservable<Map<string, User>>;
+
+  constructor(private db: AngularFireDatabase) { 
+    this.userMapStream = this.db.object(this.usersPath);
+  }
 
   updateUser(userKey: string, userUid: string): void {
     const user = new User({

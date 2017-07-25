@@ -1,8 +1,8 @@
 <md-tab-group>
   <md-tab label="All Photos">
     <md-grid-list [cols]="numColumns" gutterSize="15px" rowHeight="300px">
-      <md-grid-tile *ngFor="let photo of postService.photosStream | async | reverse">
-        <app-photo-card fxFlex [photo]=photo></app-photo-card>
+      <md-grid-tile *ngFor="let photoWithAuthor of postService.photosWithUserStream | async | reverse">
+        <app-photo-card fxFlex [photoWithAuthor]=photoWithAuthor></app-photo-card>
       </md-grid-tile>
     </md-grid-list>
   </md-tab>

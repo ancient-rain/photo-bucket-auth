@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostService } from "../post.service";
-import { Photo } from "../../models/photo.model";
+import { Photo, PhotoWithAuthor } from "../../models/photo.model";
 
 @Component({
   selector: 'app-photo-card',
@@ -8,7 +8,7 @@ import { Photo } from "../../models/photo.model";
   styleUrls: ['./photo-card.component.scss']
 })
 export class PostComponent implements OnInit {
-  @Input() photo: Photo;
+  @Input() photoWithAuthor: PhotoWithAuthor;
 
   constructor(public postService: PostService) { }
 
