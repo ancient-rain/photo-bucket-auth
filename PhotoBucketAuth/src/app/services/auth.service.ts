@@ -17,6 +17,7 @@ export class AuthService {
   displayName: Observable<string>;
   formPhoto: Photo;
   userPath: string;
+  _currentUserUid: string;
 
   constructor(private afAuth: AngularFireAuth,
     private router: Router,
@@ -26,8 +27,9 @@ export class AuthService {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
         this.userPath = `/users/${user.uid}`;
+        this._currentUserUid = user.uid;
       } else {
-        // console.log('user signed out');
+        this._currentUserUid = '';
       }
     });
 
@@ -48,6 +50,10 @@ export class AuthService {
       });
 
     this.formPhoto = new Photo();
+  }
+
+  get currentUserUid(): string {
+    return this._currentUserUid;
   }
 
   signInWithGoogle(): void {

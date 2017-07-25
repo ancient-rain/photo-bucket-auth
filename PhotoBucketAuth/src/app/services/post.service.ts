@@ -5,6 +5,7 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/combineLatest";
 import { AuthorService } from "./author.service";
 import { User } from "../models/user";
+import { AuthService } from "./auth.service";
 
 @Injectable()
 export class PostService {
@@ -15,8 +16,15 @@ export class PostService {
   photosWithUserStream: Observable<PhotoWithAuthor[]>;
 
   constructor(private db: AngularFireDatabase,
-  private authorService: AuthorService) {
-    this._photosStream = this.db.list(this.photosPath);
+  private authorService: AuthorService,
+  private authService: AuthService) {
+    this._photosStream = this.db.list(this.photosPath, {
+      query: {
+        orderByChild: 'userUid',
+        equalTo: this.authService.currentUserUid,
+      }
+    });
+
     this.photosWithUserStream = Observable.combineLatest<PhotoWithAuthor[]>(
       this._photosStream,
       this.authorService.userMapStream,
@@ -28,7 +36,7 @@ export class PostService {
           photosWithAuthor.push(photoWithAuthor);
         }
         return photosWithAuthor;
-      });
+    });
   }
 
   add(photo: Photo): void {
